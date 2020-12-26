@@ -4,10 +4,8 @@ import { connect } from "react-redux";
 import { fetchApod } from "../../../redux";
 import logo from "../../../images/welcome_blue.png";
 import Header from "../Header/Header";
-import "./Home.css";
 
 const Home = ({ apodData, fetchApod }) => {
-  console.log(apodData);
   const bgImage = apodData.loading
     ? "https://apod.nasa.gov/apod/image/2012/WinterSceneBlock.jpg"
     : apodData.url;

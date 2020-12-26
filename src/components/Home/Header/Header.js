@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../../../App";
 
 const Header = (props) => {
-  console.log(props);
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   return (
     <Navbar variant="dark" bg={props.bg} expand="lg">
       <Container>
@@ -31,8 +32,22 @@ const Header = (props) => {
             </Nav.Link>
           </Nav>
           <Nav className={`ml-auto ${props.color}`}>
-            <FontAwesomeIcon className="mr-1" icon={faUserAlt} />
-            <span style={{ fontSize: "small" }}>Log In/Sign Up</span>
+            {loggedInUser.user && loggedInUser.user.name ? (
+              <>
+                {" "}
+                <img
+                  style={{ width: "35px", height: "35px", borderRadius: "50%" }}
+                  src={loggedInUser.user.img}
+                  alt=""
+                />
+                <small className="mx-2">{loggedInUser.user.name}</small>{" "}
+              </>
+            ) : (
+              <>
+                <FontAwesomeIcon className="mr-1" icon={faUserAlt} />
+                <span style={{ fontSize: "small" }}>Log In/Sign Up</span>{" "}
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
